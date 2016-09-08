@@ -18,12 +18,11 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.manofsteel, R.drawable.skyfall, R.drawable.starwars, R.drawable.thegrey, R.drawable.titanic,
                 R.drawable.zootopia};
 
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,
-                R.layout.grid_image, values);
+        ImageAdapter newImageAdapter= new ImageAdapter(this,values);
 
         setContentView(R.layout.activity_main);
         GridView gridview = (GridView) findViewById(R.id.moviegridview);
-        gridview.setAdapter(adapter);
+        gridview.setAdapter(newImageAdapter);
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
