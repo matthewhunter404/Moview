@@ -50,7 +50,7 @@ public class ImageAdapter extends BaseAdapter {
             }
             Picasso.with(mContext)
                     .load(mThumbIds[position])
-                    .resize(mImageWidth,mImageWidth)
+                    .resize(mImageWidth,mImageHeight)
                     .centerCrop()
                     .into(imageView);
             return imageView;
