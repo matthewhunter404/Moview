@@ -15,10 +15,13 @@ import com.squareup.picasso.Picasso;
 public class ImageAdapter extends BaseAdapter {
         private Context mContext;
         private Integer[] mThumbIds;
+        private int mImageWidth=1; //initialized to one for no real reason, just in case for some reason PicAdapter isn't initialized properly
+        private int mImageHeight=1;
 
-        public ImageAdapter(Context c, Integer[] passedImageIds) {
+    public ImageAdapter(Context c, Integer[] passedImageIds,int passedViewWidth,int passedNumberOfColumns) {
             mContext = c;
             mThumbIds=passedImageIds;
+            mImageWidth=passedViewWidth/passedNumberOfColumns;
         }
 
         public int getCount() {
@@ -39,14 +42,15 @@ public class ImageAdapter extends BaseAdapter {
             if (convertView == null) {
                 // if it's not recycled, initialize some attributes
                 imageView = new ImageView(mContext);
-                imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+                mImageHeight=(int)Math.round(mImageWidth*1.5);
+                imageView.setLayoutParams(new GridView.LayoutParams(mImageWidth,mImageHeight));
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             } else {
                 imageView = (ImageView) convertView;
             }
             Picasso.with(mContext)
                     .load(mThumbIds[position])
-                    .resize(300, 300)
+                    .resize(mImageWidth,mImageWidth)
                     .centerCrop()
                     .into(imageView);
             return imageView;
